@@ -89,7 +89,6 @@ trainer = SFTTrainer(
     train_dataset=dataset["train"],
     eval_dataset=dataset["test"],
     peft_config=lora_config,
-    dataset_text_field="text",
     max_seq_length=512,
     tokenizer=tokenizer,
     args=training_args,
