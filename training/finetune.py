@@ -57,7 +57,8 @@ dataset = load_dataset(
 def format_prompt(example):
     """Formata cada par (prompt, response) no template de instrução."""
     return {
-        "text": f"### Instrução:\n{example['prompt']}\n\n### Resposta:\n{example['response']}"
+        "prompt": f"### Instrução:\n{example['prompt']}\n\n### Resposta:\n",
+        "completion": example["response"]
     }
 
 dataset = dataset.map(format_prompt)
@@ -79,7 +80,7 @@ training_args = SFTConfig(
     group_by_length=True,
     lr_scheduler_type="cosine",      
     report_to="none",
-    dataset_text_field="text",
+    dataset_text_field="completion",
     max_length=512,
     packing=False,
 )
